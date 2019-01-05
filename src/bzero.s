@@ -12,9 +12,6 @@ b_bzero:
 	mov rdx, rsi ; len
 	mov rcx, rdi ; ptr
 
-	cmp rdx, 16
-	jl .one
-
 .large:
 	cmp rdx, 8
 	jle .medium
@@ -45,7 +42,6 @@ b_bzero:
 	mov byte[rcx], 0x0
 	inc rcx
 	dec rdx
-	jmp .one
 
 .finished:
 	ret

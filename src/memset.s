@@ -13,6 +13,7 @@ b_memset:
 	mov rax, rsi ; char
 	mov rcx, rdi ; ptr
 
+	; one small operation we may loose operations by feeding rax
 	cmp rdx, 16
 	jl .one
 	
