@@ -8,8 +8,10 @@
 
 void run(const char *name, int (*f)()) {
     int   len = strlen(name);
-    char *buf = malloc(80 - len);
+    char *buf = malloc(80 - len + 1);
     memset(buf, '.', 80 - len);
+    buf[80 - len] = 0;
+
     printf("%s%s", name, buf);
 
     int res = f();
@@ -37,4 +39,19 @@ int test_bzero() {
     return 0;
 }
 
-int main() { RUN(test_bzero); }
+int test_memset() {
+    char buf[10];
+    b_memset(buf, '.', 10);
+    for (int i = 0; i < 10; i++) {
+        if (buf[i] != '.') {
+            printf("index %d != .\n", i);
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int main() {
+    RUN(test_bzero);
+    RUN(test_memset);
+}
